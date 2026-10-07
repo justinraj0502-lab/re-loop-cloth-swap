@@ -1,0 +1,695 @@
+/* =========================================================
+   RE-LOOP — GLOBAL VISUAL SYSTEM
+   Premium Fashion × Editorial × Modern Motion
+   ========================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap");
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+  background: #f4f1ea;
+}
+
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+
+  font-family: "DM Sans", sans-serif;
+
+  background:
+    radial-gradient(
+      circle at 8% 5%,
+      rgba(185, 216, 62, 0.075),
+      transparent 23%
+    ),
+    radial-gradient(
+      circle at 92% 12%,
+      rgba(255, 255, 255, 0.9),
+      transparent 27%
+    ),
+    radial-gradient(
+      circle at 52% 100%,
+      rgba(217, 212, 202, 0.45),
+      transparent 32%
+    ),
+    #f4f1ea;
+
+  color: #171715;
+
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+/* =========================================================
+   APP SHELL
+   ========================================================= */
+
+#root {
+  min-height: 100vh;
+}
+
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   AMBIENT EDITORIAL LIGHT
+   ========================================================= */
+
+.app-shell::before {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: -2;
+
+  background:
+    radial-gradient(
+      circle at 15% 12%,
+      rgba(185, 216, 62, 0.055),
+      transparent 21%
+    ),
+    radial-gradient(
+      circle at 88% 48%,
+      rgba(255, 255, 255, 0.65),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 45% 92%,
+      rgba(230, 225, 215, 0.35),
+      transparent 28%
+    );
+
+  animation: ambientDrift 22s ease-in-out infinite alternate;
+}
+
+
+.app-shell::after {
+  content: "";
+
+  position: fixed;
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+  opacity: 0.018;
+
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");
+
+  mix-blend-mode: multiply;
+}
+
+
+@keyframes ambientDrift {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+
+  100% {
+    transform: scale(1.015);
+  }
+}
+
+
+/* =========================================================
+   GLOBAL DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --reloop-paper: #f4f1ea;
+  --reloop-paper-soft: #efebe3;
+  --reloop-paper-deep: #e6e1d7;
+
+  --reloop-white: #ffffff;
+  --reloop-white-soft: rgba(255, 255, 255, 0.78);
+
+  --reloop-ink: #171715;
+  --reloop-ink-soft: #282824;
+  --reloop-ink-muted: #55534d;
+
+  --reloop-muted: #77736b;
+  --reloop-muted-light: #99958b;
+
+  --reloop-line: #d9d4ca;
+  --reloop-line-soft: rgba(23, 23, 21, 0.08);
+  --reloop-line-medium: rgba(23, 23, 21, 0.14);
+
+  --reloop-lime: #b9d83e;
+  --reloop-lime-bright: #c9e957;
+  --reloop-lime-dark: #91ad2b;
+
+  --reloop-radius-sm: 10px;
+  --reloop-radius-md: 16px;
+  --reloop-radius-lg: 24px;
+  --reloop-radius-xl: 32px;
+
+  --reloop-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Manrope", sans-serif;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
+
+  color: var(--reloop-ink);
+}
+
+
+p {
+  line-height: 1.65;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+
+button {
+  border: 0;
+}
+
+
+/* =========================================================
+   FORM ELEMENTS
+   ========================================================= */
+
+input,
+textarea,
+select {
+  color: var(--reloop-ink);
+}
+
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--reloop-muted-light);
+}
+
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  background: var(--reloop-lime);
+  color: var(--reloop-ink);
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 9px;
+}
+
+
+::-webkit-scrollbar-track {
+  background: #ebe7df;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    #bcb8ae,
+    #8f8b82
+  );
+
+  border-radius: 999px;
+
+  border: 2px solid #ebe7df;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--reloop-ink);
+}
+
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+:focus-visible {
+  outline: 2px solid var(--reloop-lime-dark);
+  outline-offset: 4px;
+}
+
+
+/* =========================================================
+   IMAGE DEFAULTS
+   ========================================================= */
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+
+img,
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/* =========================================================
+   MEDIA DEFAULTS
+   ========================================================= */
+
+video {
+  display: block;
+  max-width: 100%;
+}
+
+
+svg {
+  display: block;
+}
+
+
+/* =========================================================
+   PREMIUM SURFACE
+   ========================================================= */
+
+.reloop-glass {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.9),
+      rgba(255, 255, 255, 0.68)
+    );
+
+  border: 1px solid rgba(23, 23, 21, 0.08);
+
+  box-shadow:
+    0 18px 55px rgba(23, 23, 21, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+
+/* =========================================================
+   PREMIUM GLOW
+   ========================================================= */
+
+.reloop-glow {
+  box-shadow:
+    0 0 0 1px rgba(145, 173, 43, 0.08),
+    0 20px 65px rgba(145, 173, 43, 0.10);
+}
+
+
+/* =========================================================
+   EDITORIAL SHINE
+   ========================================================= */
+
+.reloop-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+
+.reloop-shine::after {
+  content: "";
+
+  position: absolute;
+
+  top: -120%;
+  left: -65%;
+
+  width: 42%;
+  height: 300%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.48),
+      transparent
+    );
+
+  transform: rotate(20deg);
+
+  transition:
+    left 0.9s var(--reloop-ease);
+
+  pointer-events: none;
+}
+
+
+.reloop-shine:hover::after {
+  left: 135%;
+}
+
+
+/* =========================================================
+   LUXURY UNDERLINE EFFECT
+   ========================================================= */
+
+.reloop-link {
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+}
+
+
+.reloop-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -4px;
+
+  width: 100%;
+  height: 1px;
+
+  background: currentColor;
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition:
+    transform 0.45s var(--reloop-ease);
+}
+
+
+.reloop-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+/* =========================================================
+   BUTTON INTERACTION FOUNDATION
+   ========================================================= */
+
+button,
+a {
+  transition:
+    transform 0.35s var(--reloop-ease),
+    opacity 0.25s ease,
+    color 0.25s ease,
+    background 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
+
+button:active,
+a:active {
+  transform: scale(0.975);
+}
+
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   PREMIUM HOVER LIFT
+   ========================================================= */
+
+.reloop-lift {
+  transition:
+    transform 0.45s var(--reloop-ease),
+    box-shadow 0.45s var(--reloop-ease);
+}
+
+
+.reloop-lift:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 22px 55px rgba(23, 23, 21, 0.09);
+}
+
+
+/* =========================================================
+   SOFT FLOAT
+   ========================================================= */
+
+@keyframes reloopFloat {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -7px, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+
+.reloop-float {
+  animation:
+    reloopFloat 5s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   FADE UP
+   ========================================================= */
+
+@keyframes reloopFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.reloop-fade-up {
+  animation:
+    reloopFadeUp 0.75s var(--reloop-ease) both;
+}
+
+
+/* =========================================================
+   FADE IN
+   ========================================================= */
+
+@keyframes reloopFadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+.reloop-fade-in {
+  animation:
+    reloopFadeIn 0.7s ease both;
+}
+
+
+/* =========================================================
+   PAGE TRANSITION HELPER
+   ========================================================= */
+
+.reloop-page-enter {
+  animation:
+    reloopFadeUp 0.65s var(--reloop-ease) both;
+}
+
+
+/* =========================================================
+   MOBILE TOUCH BEHAVIOR
+   ========================================================= */
+
+@media (hover: none) {
+  .reloop-lift:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .reloop-shine::after {
+    display: none;
+  }
+
+  .reloop-link::after {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+  body {
+    background:
+      radial-gradient(
+        circle at 10% 5%,
+        rgba(185, 216, 62, 0.055),
+        transparent 27%
+      ),
+      radial-gradient(
+        circle at 90% 20%,
+        rgba(255, 255, 255, 0.8),
+        transparent 30%
+      ),
+      #f4f1ea;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+
+    background:
+      radial-gradient(
+        circle at 18% 7%,
+        rgba(185, 216, 62, 0.045),
+        transparent 30%
+      ),
+      radial-gradient(
+        circle at 90% 40%,
+        rgba(255, 255, 255, 0.7),
+        transparent 32%
+      ),
+      #f4f1ea;
+  }
+
+  .app-shell::before {
+    animation-duration: 30s;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 14px;
+  }
+
+  .reloop-glass {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+}
+
+
+/* =========================================================
+   SAFE AREA
+   ========================================================= */
+
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}

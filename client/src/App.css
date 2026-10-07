@@ -1,0 +1,790 @@
+/* =========================================================
+   RE-LOOP — APP SHELL
+   Premium Editorial Fashion Interface
+   ========================================================= */
+
+
+/* =========================================================
+   APP ROOT
+   ========================================================= */
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+.app-shell {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: clip;
+}
+
+
+/* =========================================================
+   GLOBAL PAGE WRAPPER
+   ========================================================= */
+
+.page-shell {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   PREMIUM PAGE ENTRY
+   ========================================================= */
+
+.page-enter {
+  animation:
+    reloopPageEnter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+
+@keyframes reloopPageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* =========================================================
+   GLOBAL DECORATIVE LIGHT
+   ========================================================= */
+
+.app-shell .ambient-light {
+  position: fixed;
+  width: 420px;
+  height: 420px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(90px);
+
+  opacity: 0.14;
+
+  z-index: -1;
+}
+
+
+.app-shell .ambient-light.one {
+  top: -180px;
+  left: -140px;
+
+  background: #c9e957;
+
+  animation:
+    ambientOne 14s ease-in-out infinite alternate;
+}
+
+
+.app-shell .ambient-light.two {
+  right: -180px;
+  top: 34%;
+
+  background: #ffffff;
+
+  opacity: 0.7;
+
+  animation:
+    ambientTwo 17s ease-in-out infinite alternate;
+}
+
+
+@keyframes ambientOne {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(55px, 35px, 0) scale(1.12);
+  }
+}
+
+
+@keyframes ambientTwo {
+  from {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  to {
+    transform: translate3d(-45px, 25px, 0) scale(1.1);
+  }
+}
+
+
+/* =========================================================
+   PREMIUM COUNTER
+   ========================================================= */
+
+.counter {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 34px;
+
+  padding: 6px 12px;
+
+  border: 1px solid rgba(23, 23, 21, 0.1);
+
+  border-radius: 999px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.95),
+      rgba(239, 235, 227, 0.82)
+    );
+
+  color: #55534d;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  box-shadow:
+    0 8px 25px rgba(23, 23, 21, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.35s ease;
+}
+
+
+.counter:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(145, 173, 43, 0.42);
+
+  background: #ffffff;
+
+  box-shadow:
+    0 13px 32px rgba(23, 23, 21, 0.08),
+    0 0 0 4px rgba(185, 216, 62, 0.08);
+}
+
+
+.counter:focus-visible {
+  outline: 2px solid #91ad2b;
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   GENERIC PREMIUM BUTTON
+   ========================================================= */
+
+.app-button {
+  position: relative;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  border: 1px solid transparent;
+
+  border-radius: 999px;
+
+  background: #171715;
+
+  color: #ffffff;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  letter-spacing: 0.02em;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    background 0.3s ease;
+}
+
+
+.app-button::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      110deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.2) 48%,
+      transparent 70%
+    );
+
+  transform: translateX(-120%);
+
+  transition:
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+
+  z-index: -1;
+}
+
+
+.app-button:hover {
+  transform: translateY(-3px);
+
+  background: #252521;
+
+  box-shadow:
+    0 15px 35px rgba(23, 23, 21, 0.16);
+}
+
+
+.app-button:hover::before {
+  transform: translateX(120%);
+}
+
+
+.app-button:active {
+  transform: translateY(-1px) scale(0.98);
+}
+
+
+/* =========================================================
+   LIME BUTTON
+   ========================================================= */
+
+.app-button.lime {
+  background: #b9d83e;
+  color: #171715;
+}
+
+
+.app-button.lime:hover {
+  background: #c9e957;
+
+  box-shadow:
+    0 16px 38px rgba(145, 173, 43, 0.24);
+}
+
+
+/* =========================================================
+   OUTLINE BUTTON
+   ========================================================= */
+
+.app-button.outline {
+  background: rgba(255, 255, 255, 0.7);
+
+  color: #171715;
+
+  border-color: #d9d4ca;
+}
+
+
+.app-button.outline:hover {
+  background: #ffffff;
+
+  border-color: #aaa69d;
+
+  box-shadow:
+    0 12px 30px rgba(23, 23, 21, 0.08);
+}
+
+
+/* =========================================================
+   GENERIC SECTION
+   ========================================================= */
+
+.reloop-section {
+  position: relative;
+
+  width: min(1450px, calc(100% - 48px));
+
+  margin-inline: auto;
+}
+
+
+.reloop-section + .reloop-section {
+  margin-top: 80px;
+}
+
+
+/* =========================================================
+   SECTION LABEL
+   ========================================================= */
+
+.reloop-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-bottom: 14px;
+
+  color: #77736b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+}
+
+
+.reloop-label::before {
+  content: "";
+
+  width: 22px;
+  height: 1px;
+
+  background: #b9d83e;
+}
+
+
+/* =========================================================
+   EDITORIAL HEADING
+   ========================================================= */
+
+.reloop-heading {
+  max-width: 850px;
+
+  font-family: "Manrope", sans-serif;
+
+  color: #171715;
+
+  font-size: clamp(36px, 5vw, 72px);
+
+  font-weight: 800;
+
+  line-height: 0.98;
+
+  letter-spacing: -0.055em;
+}
+
+
+.reloop-heading em {
+  font-family: "Playfair Display", serif;
+
+  font-weight: 500;
+
+  letter-spacing: -0.045em;
+}
+
+
+/* =========================================================
+   SUBHEADING
+   ========================================================= */
+
+.reloop-subheading {
+  max-width: 650px;
+
+  margin-top: 18px;
+
+  color: #77736b;
+
+  font-size: 15px;
+
+  line-height: 1.75;
+}
+
+
+/* =========================================================
+   PREMIUM DIVIDER
+   ========================================================= */
+
+.reloop-divider {
+  width: 100%;
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(23, 23, 21, 0.14) 20%,
+      rgba(23, 23, 21, 0.14) 80%,
+      transparent
+    );
+}
+
+
+/* =========================================================
+   FLOATING CARD FOUNDATION
+   ========================================================= */
+
+.reloop-card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.96),
+      rgba(255, 255, 255, 0.78)
+    );
+
+  border: 1px solid rgba(23, 23, 21, 0.08);
+
+  border-radius: 24px;
+
+  box-shadow:
+    0 18px 50px rgba(23, 23, 21, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease,
+    border-color 0.35s ease;
+}
+
+
+.reloop-card:hover {
+  transform: translateY(-5px);
+
+  border-color: rgba(23, 23, 21, 0.13);
+
+  box-shadow:
+    0 28px 70px rgba(23, 23, 21, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+
+/* =========================================================
+   IMAGE HOVER FOUNDATION
+   ========================================================= */
+
+.reloop-image {
+  position: relative;
+
+  overflow: hidden;
+}
+
+
+.reloop-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease;
+}
+
+
+.reloop-image:hover img {
+  transform: scale(1.045);
+}
+
+
+/* =========================================================
+   MAGNETIC-STYLE ICON BUTTON
+   ========================================================= */
+
+.reloop-icon-button {
+  display: inline-grid;
+  place-items: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid rgba(23, 23, 21, 0.1);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.86);
+
+  color: #171715;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.4s ease;
+}
+
+
+.reloop-icon-button:hover {
+  transform: translateY(-3px) rotate(-4deg);
+
+  background: #171715;
+
+  border-color: #171715;
+
+  color: #ffffff;
+
+  box-shadow:
+    0 12px 28px rgba(23, 23, 21, 0.16);
+}
+
+
+/* =========================================================
+   TAG
+   ========================================================= */
+
+.reloop-tag {
+  display: inline-flex;
+  align-items: center;
+
+  min-height: 28px;
+
+  padding: 0 10px;
+
+  border: 1px solid rgba(23, 23, 21, 0.09);
+
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.78);
+
+  color: #55534d;
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+
+/* =========================================================
+   LOADING SHIMMER
+   ========================================================= */
+
+.reloop-loading {
+  position: relative;
+
+  overflow: hidden;
+
+  background: #e8e4dc;
+}
+
+
+.reloop-loading::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.65),
+      transparent
+    );
+
+  transform: translateX(-100%);
+
+  animation:
+    reloopShimmer 1.5s infinite;
+}
+
+
+@keyframes reloopShimmer {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+
+/* =========================================================
+   CURSOR GLOW
+   ========================================================= */
+
+.reloop-cursor-glow {
+  position: fixed;
+
+  width: 180px;
+  height: 180px;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(185, 216, 62, 0.1),
+      transparent 68%
+    );
+
+  filter: blur(20px);
+
+  transform: translate(-50%, -50%);
+
+  z-index: 999;
+
+  opacity: 0;
+
+  transition: opacity 0.3s ease;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 1100px) {
+  .reloop-section {
+    width: min(100% - 40px, 1450px);
+  }
+
+  .reloop-section + .reloop-section {
+    margin-top: 64px;
+  }
+
+  .reloop-heading {
+    font-size: clamp(34px, 6vw, 58px);
+  }
+}
+
+
+@media (max-width: 768px) {
+  .reloop-section {
+    width: calc(100% - 28px);
+  }
+
+  .reloop-section + .reloop-section {
+    margin-top: 48px;
+  }
+
+  .reloop-heading {
+    font-size: clamp(32px, 10vw, 48px);
+
+    letter-spacing: -0.045em;
+  }
+
+  .reloop-subheading {
+    font-size: 14px;
+  }
+
+  .app-shell .ambient-light {
+    width: 280px;
+    height: 280px;
+
+    filter: blur(70px);
+  }
+
+  .reloop-card {
+    border-radius: 20px;
+  }
+
+  .app-button {
+    min-height: 44px;
+
+    padding-inline: 17px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .reloop-section {
+    width: calc(100% - 22px);
+  }
+
+  .reloop-heading {
+    font-size: clamp(30px, 11vw, 42px);
+  }
+
+  .reloop-label {
+    font-size: 9px;
+  }
+
+  .reloop-subheading {
+    margin-top: 14px;
+
+    font-size: 13px;
+
+    line-height: 1.65;
+  }
+
+  .reloop-icon-button {
+    width: 38px;
+    height: 38px;
+  }
+
+  .counter {
+    font-size: 9px;
+  }
+}
+
+
+/* =========================================================
+   TOUCH DEVICES
+   ========================================================= */
+
+@media (hover: none) {
+  .reloop-card:hover {
+    transform: none;
+
+    box-shadow:
+      0 18px 50px rgba(23, 23, 21, 0.055);
+  }
+
+  .reloop-image:hover img {
+    transform: none;
+  }
+
+  .reloop-icon-button:hover {
+    transform: none;
+
+    background: rgba(255, 255, 255, 0.86);
+
+    border-color: rgba(23, 23, 21, 0.1);
+
+    color: #171715;
+
+    box-shadow: none;
+  }
+
+  .reloop-cursor-glow {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .page-enter,
+  .reloop-loading::after,
+  .app-shell .ambient-light {
+    animation: none !important;
+  }
+
+  .reloop-card,
+  .reloop-image img,
+  .reloop-icon-button,
+  .app-button,
+  .counter {
+    transition: none !important;
+  }
+}
