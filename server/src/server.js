@@ -17,7 +17,7 @@ import favoriteRoutes from "./routes/favoriteRoutes.js";
 dotenv.config();
 
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 // Connect MongoDB
 connectDB();
