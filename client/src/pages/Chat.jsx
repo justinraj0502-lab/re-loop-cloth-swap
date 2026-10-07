@@ -10,6 +10,7 @@ import {
   Loader2,
 } from "lucide-react";
 import "./Chat.css";
+import API from "../api";
 
 function Chat() {
   const { swapRequestId } = useParams();
@@ -43,7 +44,7 @@ function Chat() {
 
       // Load messages
       const messageResponse = await fetch(
-        `http://localhost:5000/api/messages/${swapRequestId}`,
+        `${API}/messages/${swapRequestId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -60,22 +61,22 @@ function Chat() {
       setMessages(messageData.messages);
 
       const readResponse = await fetch(
-  `http://localhost:5000/api/messages/${swapRequestId}/read`,
-  {
-    method: "PATCH",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  }
-);
+        `${API}/messages/${swapRequestId}/read`,
+        {
+          method: "PATCH",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-if (!readResponse.ok) {
-  console.error("Unable to mark messages as read");
-}
+      if (!readResponse.ok) {
+        console.error("Unable to mark messages as read");
+      }
 
       // Load swap request
       const swapResponse = await fetch(
-        "http://localhost:5000/api/swap-requests/mine",
+        `${API}/swap-requests/mine`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -129,7 +130,7 @@ if (!readResponse.ok) {
       setSending(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/messages",
+        `${API}/messages`,
         {
           method: "POST",
           headers: {

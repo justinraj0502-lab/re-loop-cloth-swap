@@ -9,6 +9,7 @@ import {
   Sparkles,
   ArrowUpRight,
 } from "lucide-react";
+import API from "../api";
 import "./Favorites.css";
 
 function Favorites() {
@@ -31,14 +32,11 @@ function Favorites() {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/favorites",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/favorites`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -66,15 +64,12 @@ function Favorites() {
     setRemovingId(clothingId);
 
     try {
-      const response = await fetch(
-        `http://localhost:5000/api/favorites/${clothingId}`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/favorites/${clothingId}`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -153,9 +148,7 @@ function Favorites() {
           <span>Back to marketplace</span>
         </Link>
 
-        <Link
-          className="favorites-logo"
-        >
+        <Link className="favorites-logo">
           <span className="favorites-logo-icon">
             <Shirt size={19} />
           </span>

@@ -12,6 +12,7 @@ import {
   CheckCircle,
 } from "lucide-react";
 import "./CreateListing.css";
+import API from "../api";
 
 function CreateListing() {
   const navigate = useNavigate();
@@ -39,69 +40,69 @@ function CreateListing() {
   };
 
   const calculateSwapValue = async () => {
-  if (!formData.type || !formData.condition) {
-    setValueError("Select type and condition first.");
-    return;
-  }
-
-  try {
-    setCalculatingValue(true);
-    setValueError("");
-
-    // Our calculator API uses these category names
-    const supportedCategories = [
-      "T-Shirt",
-      "Shirt",
-      "Jeans",
-      "Dress",
-      "Jacket",
-      "Hoodie",
-    ];
-
-    const category = supportedCategories.includes(formData.type)
-      ? formData.type
-      : "T-Shirt";
-
-    // Convert Create Listing's "Excellent" to calculator's "Like New"
-    const condition =
-      formData.condition === "Excellent"
-        ? "Like New"
-        : formData.condition;
-
-    const response = await fetch(
-      "http://localhost:5000/api/value/calculate",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          category,
-          brand: formData.brand || "Other",
-          condition,
-        }),
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.message || "Unable to calculate value."
-      );
+    if (!formData.type || !formData.condition) {
+      setValueError("Select type and condition first.");
+      return;
     }
 
-    setFormData((current) => ({
-      ...current,
-      swapValue: data.estimatedValue,
-    }));
-  } catch (error) {
-    console.error("Swap value error:", error);
-    setValueError("Unable to calculate swap value.");
-  } finally {
-    setCalculatingValue(false);
-  }
-};
+    try {
+      setCalculatingValue(true);
+      setValueError("");
+
+      // Our calculator API uses these category names
+      const supportedCategories = [
+        "T-Shirt",
+        "Shirt",
+        "Jeans",
+        "Dress",
+        "Jacket",
+        "Hoodie",
+      ];
+
+      const category = supportedCategories.includes(formData.type)
+        ? formData.type
+        : "T-Shirt";
+
+      // Convert Create Listing's "Excellent" to calculator's "Like New"
+      const condition =
+        formData.condition === "Excellent"
+          ? "Like New"
+          : formData.condition;
+
+      const response = await fetch(
+        `${API}/value/calculate`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category,
+            brand: formData.brand || "Other",
+            condition,
+          }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Unable to calculate value."
+        );
+      }
+
+      setFormData((current) => ({
+        ...current,
+        swapValue: data.estimatedValue,
+      }));
+    } catch (error) {
+      console.error("Swap value error:", error);
+      setValueError("Unable to calculate swap value.");
+    } finally {
+      setCalculatingValue(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -118,7 +119,7 @@ function CreateListing() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/clothing",
+        `${API}/clothing`,
         {
           method: "POST",
           headers: {
@@ -172,9 +173,9 @@ function CreateListing() {
       {/* Header */}
       <header className="listing-header">
         <Link to="/marketplace" className="listing-back">
-  <ArrowLeft size={18} />
-  Back to marketplace
-</Link>
+          <ArrowLeft size={18} />
+          Back to marketplace
+        </Link>
 
         <div className="listing-logo">
           <div className="logo-icon">
@@ -408,38 +409,38 @@ function CreateListing() {
               <div className="two-columns">
 
                 <div className="field-group">
-  <label>Estimated swap value</label>
+                  <label>Estimated swap value</label>
 
-  <div className="input-box">
-    <IndianRupee size={18} />
+                  <div className="input-box">
+                    <IndianRupee size={18} />
 
-    <input
-      type="number"
-      name="swapValue"
-      placeholder="Calculate value"
-      min="0"
-      value={formData.swapValue}
-      onChange={handleChange}
-    />
-  </div>
+                    <input
+                      type="number"
+                      name="swapValue"
+                      placeholder="Calculate value"
+                      min="0"
+                      value={formData.swapValue}
+                      onChange={handleChange}
+                    />
+                  </div>
 
-  <button
-    type="button"
-    className="calculate-value-btn"
-    onClick={calculateSwapValue}
-    disabled={calculatingValue}
-  >
-    {calculatingValue
-      ? "Calculating..."
-      : "✨ Calculate swap value"}
-  </button>
+                  <button
+                    type="button"
+                    className="calculate-value-btn"
+                    onClick={calculateSwapValue}
+                    disabled={calculatingValue}
+                  >
+                    {calculatingValue
+                      ? "Calculating..."
+                      : "✨ Calculate swap value"}
+                  </button>
 
-  {valueError && (
-    <small className="value-error-text">
-      {valueError}
-    </small>
-  )}
-</div>
+                  {valueError && (
+                    <small className="value-error-text">
+                      {valueError}
+                    </small>
+                  )}
+                </div>
 
                 <div className="field-group">
                   <label>Location</label>

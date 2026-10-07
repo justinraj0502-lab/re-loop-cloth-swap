@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Lock, ShieldCheck, ArrowLeft, KeyRound } from "lucide-react";
 import "./ResetPassword.css";
+import API from "../api";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function ResetPassword() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/password-reset/verify",
+        `${API}/password-reset/verify`,
         {
           method: "POST",
           headers: {
@@ -58,7 +59,7 @@ function ResetPassword() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/password-reset/reset",
+        `${API}/password-reset/reset`,
         {
           method: "POST",
           headers: {

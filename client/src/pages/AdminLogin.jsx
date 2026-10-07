@@ -10,6 +10,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import "./AdminLogin.css";
+import API from "../api";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -41,7 +42,7 @@ function AdminLogin() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${API}/auth/login`,
         {
           method: "POST",
           headers: {

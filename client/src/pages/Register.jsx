@@ -14,8 +14,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import "./Register.css";
-
-const API = "http://localhost:5000/api";
+import API from "../api";
 
 function Register() {
   const navigate = useNavigate();

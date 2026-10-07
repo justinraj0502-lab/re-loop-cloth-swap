@@ -13,6 +13,7 @@ import {
   MoveRight,
   ChevronDown,
 } from "lucide-react";
+import API from "../api";
 import "./Marketplace.css";
 
 const heroImages = [
@@ -72,7 +73,7 @@ function Marketplace() {
       setUserLocation(location);
 
       const response = await fetch(
-        `http://localhost:5000/api/clothing/nearby?location=${encodeURIComponent(
+        `${API}/clothing/nearby?location=${encodeURIComponent(
           location
         )}`
       );
@@ -94,12 +95,14 @@ function Marketplace() {
   }, []);
 
   useEffect(() => {
-  const timer = setInterval(() => {
-    setHeroIndex((current) => (current + 1) % heroImages.length);
-  }, 4000);
+    const timer = setInterval(() => {
+      setHeroIndex(
+        (current) => (current + 1) % heroImages.length
+      );
+    }, 4000);
 
-  return () => clearInterval(timer);
-}, []);
+    return () => clearInterval(timer);
+  }, []);
 
   useEffect(() => {
     fetchClothing();
@@ -211,7 +214,7 @@ function Marketplace() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/favorites",
+        `${API}/favorites`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -253,7 +256,7 @@ function Marketplace() {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/favorites/${clothingId}`,
+        `${API}/favorites/${clothingId}`,
         {
           method: isFavorite ? "DELETE" : "POST",
           headers: {
@@ -315,7 +318,7 @@ function Marketplace() {
   const fetchClothing = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/clothing"
+        `${API}/clothing`
       );
 
       const data = await response.json();
@@ -729,25 +732,29 @@ function Marketplace() {
             </div>
 
             <div className="hero-frame-label">
-            <span>CURATED</span>
+              <span>CURATED</span>
 
-            <div className="hero-dots">
-              {heroImages.map((src, index) => (
-                <button
-                  key={src}
-                  type="button"
-                  className={index === heroIndex ? "hero-dot active" : "hero-dot"}
-                  onClick={() => setHeroIndex(index)}
-                  aria-label={`Show photo ${index + 1}`}
-                />
-              ))}
+              <div className="hero-dots">
+                {heroImages.map((src, index) => (
+                  <button
+                    key={src}
+                    type="button"
+                    className={
+                      index === heroIndex
+                        ? "hero-dot active"
+                        : "hero-dot"
+                    }
+                    onClick={() => setHeroIndex(index)}
+                    aria-label={`Show photo ${index + 1}`}
+                  />
+                ))}
+              </div>
+
+              <span>
+                {String(heroIndex + 1).padStart(2, "0")} /{" "}
+                {String(heroImages.length).padStart(2, "0")}
+              </span>
             </div>
-
-            <span>
-              {String(heroIndex + 1).padStart(2, "0")} /{" "}
-              {String(heroImages.length).padStart(2, "0")}
-            </span>
-          </div>
 
           </div>
 

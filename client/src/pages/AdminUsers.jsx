@@ -13,6 +13,7 @@ import {
   UserCheck,
 } from "lucide-react";
 import "./AdminUsers.css";
+import API from "../api";
 
 function AdminUsers() {
   const navigate = useNavigate();
@@ -36,14 +37,11 @@ function AdminUsers() {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/admin/users",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/admin/users`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 

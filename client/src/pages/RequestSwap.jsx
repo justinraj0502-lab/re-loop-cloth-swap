@@ -8,6 +8,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import "./RequestSwap.css";
+import API from "../api";
 
 function RequestSwap() {
   const { id } = useParams();
@@ -32,7 +33,7 @@ function RequestSwap() {
       try {
         // Get requested clothing
         const itemResponse = await fetch(
-          `http://localhost:5000/api/clothing/${id}`
+          `${API}/clothing/${id}`
         );
 
         const itemData = await itemResponse.json();
@@ -47,7 +48,7 @@ function RequestSwap() {
 
         // Get all available clothing
         const clothingResponse = await fetch(
-          "http://localhost:5000/api/clothing"
+          `${API}/clothing`
         );
 
         const clothingData = await clothingResponse.json();
@@ -81,55 +82,55 @@ function RequestSwap() {
   }, [id, navigate, token]);
 
   const selectedOffer = myItems.find(
-  (item) => item._id === selectedItem
-);
-
-const requestedValue = requestedItem?.swapValue || 0;
-const offeredValue = selectedOffer?.swapValue || 0;
-const valueDifference = offeredValue - requestedValue;
-
-  const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  if (!selectedItem) {
-    alert("Please select a clothing item to offer.");
-    return;
-  }
-
-  if (!requestedItem) {
-    alert("Requested item is unavailable.");
-    return;
-  }
-
-  if (requestedItem.status !== "available") {
-    alert("Sorry, this clothing item is no longer available.");
-    return;
-  }
-
-  const selectedOffer = myItems.find(
     (item) => item._id === selectedItem
   );
 
-  if (!selectedOffer) {
-    alert("The selected clothing item is no longer available.");
-    return;
-  }
+  const requestedValue = requestedItem?.swapValue || 0;
+  const offeredValue = selectedOffer?.swapValue || 0;
+  const valueDifference = offeredValue - requestedValue;
 
-  if (selectedOffer.status !== "available") {
-    alert("Your selected clothing item is no longer available.");
-    return;
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  if (selectedOffer._id === requestedItem._id) {
-    alert("You cannot offer the same item you are requesting.");
-    return;
-  }
+    if (!selectedItem) {
+      alert("Please select a clothing item to offer.");
+      return;
+    }
 
-  setSending(true);
+    if (!requestedItem) {
+      alert("Requested item is unavailable.");
+      return;
+    }
+
+    if (requestedItem.status !== "available") {
+      alert("Sorry, this clothing item is no longer available.");
+      return;
+    }
+
+    const selectedOffer = myItems.find(
+      (item) => item._id === selectedItem
+    );
+
+    if (!selectedOffer) {
+      alert("The selected clothing item is no longer available.");
+      return;
+    }
+
+    if (selectedOffer.status !== "available") {
+      alert("Your selected clothing item is no longer available.");
+      return;
+    }
+
+    if (selectedOffer._id === requestedItem._id) {
+      alert("You cannot offer the same item you are requesting.");
+      return;
+    }
+
+    setSending(true);
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/swap-requests",
+        `${API}/swap-requests`,
         {
           method: "POST",
           headers: {
@@ -176,7 +177,6 @@ const valueDifference = offeredValue - requestedValue;
 
   return (
     <div className="swap-page">
-
       <header className="swap-header">
         <button
           className="swap-back-btn"
@@ -193,7 +193,6 @@ const valueDifference = offeredValue - requestedValue;
       </header>
 
       <main className="swap-container">
-
         <div className="swap-heading">
           <span>MAKE A SWAP</span>
 
@@ -210,10 +209,8 @@ const valueDifference = offeredValue - requestedValue;
         </div>
 
         <div className="swap-grid">
-
           {/* REQUESTED ITEM */}
           <section className="swap-card">
-
             <div className="swap-card-label">
               YOU WANT
             </div>
@@ -243,7 +240,6 @@ const valueDifference = offeredValue - requestedValue;
 
           {/* SWAP FORM */}
           <section className="swap-form-card">
-
             <div className="swap-arrow">
               <ArrowRight size={28} />
             </div>
@@ -253,10 +249,10 @@ const valueDifference = offeredValue - requestedValue;
             </div>
 
             <form onSubmit={handleSubmit}>
-
               {myItems.length === 0 ? (
                 <div className="no-items">
                   <h3>No available items</h3>
+
                   <p>
                     You need at least one available
                     clothing item to make a swap.
@@ -272,7 +268,6 @@ const valueDifference = offeredValue - requestedValue;
               ) : (
                 <>
                   <div className="offer-items">
-
                     {myItems.map((item) => (
                       <label
                         key={item._id}
@@ -305,17 +300,18 @@ const valueDifference = offeredValue - requestedValue;
 
                         <div className="offer-info">
                           <h3>{item.title}</h3>
+
                           <p>
                             {item.brand || "No brand"} ·{" "}
                             {item.size}
                           </p>
+
                           <strong>
                             ₹{item.swapValue || 0}
                           </strong>
                         </div>
                       </label>
                     ))}
-
                   </div>
 
                   {selectedOffer && (
@@ -356,7 +352,8 @@ const valueDifference = offeredValue - requestedValue;
                         ) : (
                           <>
                             <Sparkles size={15} />
-                            Your offer is ₹{Math.abs(valueDifference)} lower
+                            Your offer is ₹
+                            {Math.abs(valueDifference)} lower
                           </>
                         )}
                       </div>
@@ -389,17 +386,14 @@ const valueDifference = offeredValue - requestedValue;
                   </button>
                 </>
               )}
-
             </form>
           </section>
-
         </div>
 
         <div className="swap-note">
           🔒 Keep conversations respectful and never
           share sensitive personal information.
         </div>
-
       </main>
     </div>
   );

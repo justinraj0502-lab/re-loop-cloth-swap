@@ -14,6 +14,7 @@ import {
   Recycle,
 } from "lucide-react";
 import "./Login.css";
+import API from "../api";
 
 function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -42,7 +43,7 @@ function Login() {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${API}/auth/login`,
         {
           method: "POST",
           headers: {
@@ -90,7 +91,7 @@ function Login() {
   ) => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/google",
+        `${API}/auth/google`,
         {
           method: "POST",
           headers: {

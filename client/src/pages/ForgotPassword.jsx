@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Mail, ArrowLeft, ShieldCheck, Sparkles } from "lucide-react";
+import API from "../api";
 import "./ForgotPassword.css";
 
 function ForgotPassword() {
@@ -16,7 +17,7 @@ function ForgotPassword() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/api/password-reset/send",
+        `${API}/password-reset/send`,
         {
           method: "POST",
           headers: {

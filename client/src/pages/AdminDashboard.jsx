@@ -12,6 +12,7 @@ import {
   Activity,
   BarChart3,
 } from "lucide-react";
+import API from "../api";
 import "./AdminDashboard.css";
 
 function AdminDashboard() {
@@ -39,14 +40,11 @@ function AdminDashboard() {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/admin/stats",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/admin/stats`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -123,12 +121,12 @@ function AdminDashboard() {
           </button>
 
           <button
-  className="admin-nav-item"
-  onClick={() => navigate("/admin/analytics")}
->
-  <BarChart3 size={18} />
-  Analytics
-</button>
+            className="admin-nav-item"
+            onClick={() => navigate("/admin/analytics")}
+          >
+            <BarChart3 size={18} />
+            Analytics
+          </button>
 
         </nav>
 
@@ -324,20 +322,20 @@ function AdminDashboard() {
             </button>
 
             <button
-  className="management-card"
-  onClick={() => navigate("/admin/analytics")}
->
-  <div className="management-icon">
-    <BarChart3 size={22} />
-  </div>
+              className="management-card"
+              onClick={() => navigate("/admin/analytics")}
+            >
+              <div className="management-icon">
+                <BarChart3 size={22} />
+              </div>
 
-  <div>
-    <h3>View analytics</h3>
-    <p>Track community activity and performance.</p>
-  </div>
+              <div>
+                <h3>View analytics</h3>
+                <p>Track community activity and performance.</p>
+              </div>
 
-  <ArrowUpRight size={19} />
-</button>
+              <ArrowUpRight size={19} />
+            </button>
 
           </div>
 

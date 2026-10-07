@@ -10,6 +10,7 @@ import {
   Sparkles,
   ShieldCheck,
 } from "lucide-react";
+import API from "../api";
 import "./ItemDetails.css";
 
 function ItemDetails() {
@@ -22,14 +23,14 @@ function ItemDetails() {
   const [favoriteLoading, setFavoriteLoading] = useState(false);
 
   useEffect(() => {
-  fetchItem();
-  checkFavorite();
-}, [id]);
+    fetchItem();
+    checkFavorite();
+  }, [id]);
 
   const fetchItem = async () => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/clothing/${id}`
+        `${API}/clothing/${id}`
       );
 
       const data = await response.json();
@@ -50,73 +51,73 @@ function ItemDetails() {
   };
 
   const checkFavorite = async () => {
-  const token = localStorage.getItem("clothswapToken");
+    const token = localStorage.getItem("clothswapToken");
 
-  if (!token || !id) {
-    return;
-  }
-
-  try {
-    const response = await fetch(
-      `http://localhost:5000/api/favorites/${id}/check`,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    if (response.ok) {
-      setLiked(data.isFavorite);
-    }
-  } catch (error) {
-    console.error("Check favorite error:", error);
-  }
-};
-
-    const toggleFavorite = async () => {
-  const token = localStorage.getItem("clothswapToken");
-
-  if (!token) {
-    alert("Please login to save favorites.");
-    navigate("/login");
-    return;
-  }
-
-  if (favoriteLoading) {
-    return;
-  }
-
-  setFavoriteLoading(true);
-
-  try {
-    const response = await fetch(
-      `http://localhost:5000/api/favorites/${id}`,
-      {
-        method: liked ? "DELETE" : "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      alert(data.message || "Unable to update favorite.");
+    if (!token || !id) {
       return;
     }
 
-    setLiked(!liked);
-  } catch (error) {
-    console.error("Favorite error:", error);
-    alert("Unable to connect to server.");
-  } finally {
-    setFavoriteLoading(false);
-  }
-};
+    try {
+      const response = await fetch(
+        `${API}/favorites/${id}/check`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setLiked(data.isFavorite);
+      }
+    } catch (error) {
+      console.error("Check favorite error:", error);
+    }
+  };
+
+  const toggleFavorite = async () => {
+    const token = localStorage.getItem("clothswapToken");
+
+    if (!token) {
+      alert("Please login to save favorites.");
+      navigate("/login");
+      return;
+    }
+
+    if (favoriteLoading) {
+      return;
+    }
+
+    setFavoriteLoading(true);
+
+    try {
+      const response = await fetch(
+        `${API}/favorites/${id}`,
+        {
+          method: liked ? "DELETE" : "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert(data.message || "Unable to update favorite.");
+        return;
+      }
+
+      setLiked(!liked);
+    } catch (error) {
+      console.error("Favorite error:", error);
+      alert("Unable to connect to server.");
+    } finally {
+      setFavoriteLoading(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -186,7 +187,11 @@ function ItemDetails() {
                 }`}
                 onClick={toggleFavorite}
                 disabled={favoriteLoading}
-                aria-label={liked ? "Remove from favorites" : "Add to favorites"}
+                aria-label={
+                  liked
+                    ? "Remove from favorites"
+                    : "Add to favorites"
+                }
               >
                 <Heart
                   size={21}

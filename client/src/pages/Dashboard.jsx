@@ -12,6 +12,7 @@ import {
   X,
 } from "lucide-react";
 import "./Dashboard.css";
+import API from "../api";
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -38,7 +39,7 @@ function Dashboard() {
     const loadRequests = async () => {
       try {
         const response = await fetch(
-          "http://localhost:5000/api/swap-requests/mine",
+          `${API}/swap-requests/mine`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -62,7 +63,7 @@ function Dashboard() {
         for (const request of loadedRequests) {
           try {
             const messageResponse = await fetch(
-              `http://localhost:5000/api/messages/${request._id}`,
+              `${API}/messages/${request._id}`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,
@@ -169,7 +170,7 @@ function Dashboard() {
   const handleStatusUpdate = async (requestId, status) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/swap-requests/${requestId}/status`,
+        `${API}/swap-requests/${requestId}/status`,
         {
           method: "PATCH",
           headers: {

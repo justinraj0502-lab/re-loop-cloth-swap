@@ -2,6 +2,7 @@ import { useState } from "react";
 import { ArrowLeft, Calculator, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 import "./SwapValue.css";
+import API from "../api";
 
 function SwapValue() {
   const [formData, setFormData] = useState({
@@ -37,7 +38,7 @@ function SwapValue() {
       setError("");
 
       const response = await fetch(
-        "http://localhost:5000/api/value/calculate",
+        `${API}/value/calculate`,
         {
           method: "POST",
           headers: {

@@ -12,6 +12,7 @@ import {
   RefreshCw,
   ShieldCheck,
 } from "lucide-react";
+import API from "../api";
 import "./AdminAnalytics.css";
 
 function AdminAnalytics() {
@@ -21,14 +22,14 @@ function AdminAnalytics() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-  fetchAnalytics();
-
-  const interval = setInterval(() => {
     fetchAnalytics();
-  }, 30000);
 
-  return () => clearInterval(interval);
-}, []);
+    const interval = setInterval(() => {
+      fetchAnalytics();
+    }, 30000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const fetchAnalytics = async () => {
     try {
@@ -41,14 +42,11 @@ function AdminAnalytics() {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/admin/analytics",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/admin/analytics`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 

@@ -13,6 +13,7 @@ import {
   PackageCheck,
   ArrowLeftRight,
 } from "lucide-react";
+import API from "../api";
 import "./AdminListings.css";
 
 function AdminListings() {
@@ -38,14 +39,11 @@ function AdminListings() {
         return;
       }
 
-      const response = await fetch(
-        "http://localhost:5000/api/admin/listings",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API}/admin/listings`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       const data = await response.json();
 
@@ -82,7 +80,7 @@ function AdminListings() {
       setDeletingId(id);
 
       const response = await fetch(
-        `http://localhost:5000/api/admin/listings/${id}`,
+        `${API}/admin/listings/${id}`,
         {
           method: "DELETE",
           headers: {
