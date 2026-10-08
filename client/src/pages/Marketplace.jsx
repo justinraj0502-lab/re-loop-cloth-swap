@@ -940,15 +940,21 @@ function Marketplace() {
 
         <div className="type-filters">
 
-          {[
-            "All",
-            "T-Shirt",
-            "Shirt",
-            "Jeans",
-            "Dress",
-            "Jacket",
-            "Hoodie",
-          ].map((itemType) => (
+        {[
+          "All",
+          "T-Shirt",
+          "Shirt",
+          "Jeans",
+          "Dress",
+          "Top",
+          "Skirt",
+          "Kurti",
+          "Saree",
+          "Jacket",
+          "Hoodie",
+          "Shorts",
+          "Pants",
+        ].map((itemType) => (
             <button
               key={itemType}
               className={
