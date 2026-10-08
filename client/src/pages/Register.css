@@ -1380,3 +1380,17 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* MOBILE - HIDE REGISTER IMAGE */
+
+@media (max-width: 780px) {
+  .hero-section {
+    display: none;
+  }
+
+  .form-section {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}

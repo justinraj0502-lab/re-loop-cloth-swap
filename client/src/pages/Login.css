@@ -1628,3 +1628,17 @@ body,
     transition: none;
   }
 }
+
+/* MOBILE - HIDE LOGIN IMAGE */
+
+@media (max-width: 760px) {
+  .login-visual {
+    display: none;
+  }
+
+  .login-form-section {
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+  }
+}
