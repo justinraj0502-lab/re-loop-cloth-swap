@@ -398,7 +398,10 @@
   overflow: hidden;
 }
 
-.hero-line span,
+.hero-line span{
+  display: inline-block;
+  padding-bottom: 35px;
+}
 .hero-line em {
   display: inline-block;
   padding-left: 13px;
