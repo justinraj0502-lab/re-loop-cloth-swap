@@ -394,12 +394,14 @@
 
 .hero-line {
   display: block;
+  padding-bottom: 15px;
   overflow: hidden;
 }
 
 .hero-line span,
 .hero-line em {
   display: inline-block;
+  padding-left: 13px;
   padding-bottom: 35px;
 }
 
